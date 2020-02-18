@@ -1,0 +1,121 @@
+"Included scalars"
+scalar JSON
+scalar Upload
+
+"It will increment!"
+type Counter {
+  "Number of increments"
+  count: Int!
+  "Full message for testing"
+  countStr: String
+}
+
+"A text message send by users"
+type Message {
+  id: ID!
+  "Message content"
+  text: String!
+}
+
+"Input from user to create a message"
+input MessageInput {
+  "Message content"
+  text: String!
+}
+
+type File {
+  id: ID!
+  path: String!
+  filename: String!
+  mimetype: String!
+  encoding: String!
+}
+
+"周报内容"
+type Weekly {
+  id: ID!
+  theWeek: String!
+  nxtWeek: String!
+  risk: String
+  advice: String
+  userNo: String!
+  weekNo: Int!
+}
+
+"写入周报参数"
+input WeeklyInput {
+  theWeek: String!
+  nxtWeek: String!
+  risk: String
+  advice: String
+  userNo: String!
+  weekNo: Int!
+}
+"用户信息"
+type User {
+  id: ID!
+  userNo: String!
+  name: String!
+  isAdmin: Boolean
+}
+
+"用户注册"
+input UserInput {
+  userNo: String!
+  name: String!
+  passWord: String!
+  isAdmin: Boolean!
+}
+"用户修改"
+input EditUserinput {
+  id: ID!
+  item: UserInput!
+}
+"登录返回值"
+type LoginToken {
+  refresh_token: String!
+  access_token: String!
+}
+# input LoginInput {
+#   userNo: String!
+#   passWord: String!
+# }
+
+type Query {
+  "Test query with a parameter"
+  hello(name: String): String!
+  "List of messages sent by users"
+  messages: [Message]
+  "查出所有的周报"
+  weeklys(userNo: String): [Weekly]
+  "---所有用户---"
+  users: [User!]
+  uploads: [File]
+  singleUser(userNo: String): [User]
+}
+
+type Mutation {
+  myMutation: String!
+  "Add a message and publish it on 'messages' subscription channel"
+  addMessage(input: MessageInput!): Message!
+  singleUpload(file: Upload!): File!
+  multipleUpload(files: [Upload!]!): [File!]!
+  "---添加周报----"
+  addWeek(input: WeeklyInput!): Weekly!
+  "---添加用户---"
+  addUser(input: UserInput!): User!
+  "--修改用户--"
+  editUser(input: EditUserinput!): User!
+  "--删除用户--"
+  removeUser(userNo: String!): User!
+  "--登录--"
+  userLogin(userNo: String!, passWord: String!): LoginToken!
+}
+
+type Subscription {
+  mySub: String!
+  "This will update every 2 seconds"
+  counter: Counter!
+  "When a new message is added"
+  messageAdded: Message!
+}

@@ -1,0 +1,8 @@
+query singleUser($userNo: String) {
+  singleUser(userNo: $userNo) {
+    id
+    userNo
+    name
+    isAdmin
+  }
+}

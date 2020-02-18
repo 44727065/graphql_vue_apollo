@@ -1,0 +1,8 @@
+# import "./UserFragment.gql"
+
+mutation addUser($input: UserInput!) {
+  addUser(input: $input) {
+    userNo
+    name
+  }
+}
