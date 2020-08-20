@@ -12,7 +12,7 @@
     "apollo:start": "vue-cli-service apollo:start"
   },
   "dependencies": {
-    "bcrypt": "^1.0.2",
+    "bcrypt": "^5.0.0",
     "core-js": "^3.6.4",
     "graphql-type-json": "^0.2.1",
     "jsonwebtoken": "^8.5.1",
